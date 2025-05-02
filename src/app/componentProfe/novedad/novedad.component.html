@@ -1,0 +1,78 @@
+<div class="container mt-5">
+    <h2 class="text-danger fw-bold text-center">Registro Novedad</h2>
+    <form class="mt-5">
+      <div class="row my-3">
+        <!-- Selección de Tipo de Novedad -->
+        <div class="col-md-6 form-group">
+          <label for="tipo-novedad">Tipo de novedad</label>
+          <select
+            class="form-control"
+            id="tipo-novedad"
+            [(ngModel)]="formData.tipoNovedad"
+            name="tipoNovedad"
+            required
+          >
+            <option value="" disabled>Selecciona una opción</option>
+            <option *ngFor="let tipo of dataTipoNovedad" [value]="tipo.idTipoNovedad">
+              {{ tipo.nombre }}
+            </option>
+          </select>
+        </div>
+  
+        <!-- Selección de Tipo de Equipo -->
+        <div class="col-md-6 form-group">
+          <label for="tipo-equipo">Tipo de Equipo</label>
+          <select
+            class="form-control"
+            id="tipo-equipo"
+            [(ngModel)]="formData.tipoEquipo"
+            name="tipoEquipo"
+            required
+          >
+            <option value="" disabled>Selecciona una opción</option>
+            <option *ngFor="let equipo of dataTipoEquipo" [value]="equipo.idEquipo">
+              {{ equipo.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Campo de Descripción -->
+      <div class="row my-3">
+        <div class="col-md-12 form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea
+            class="form-control"
+            id="descripcion"
+            placeholder="Describe el incidente"
+            [(ngModel)]="formData.descripcion"
+            name="descripcion"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+      </div>
+  
+      <!-- Botón de Enviar -->
+      <div class="text-center my-4">
+        <button type="button" class="btn btn-primary" (click)="onSubmit(modal)">
+          Crear Registro
+        </button>
+      </div>
+    </form>
+  
+    <!-- Modal de Éxito -->
+    <ng-template #modal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">Registro Exitoso</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
+      </div>
+      <div class="modal-body">
+        <p>La novedad fue registrada exitosamente.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="irAlInicio()">Volver al inicio</button>
+      </div>
+    </ng-template>
+  </div>
+  

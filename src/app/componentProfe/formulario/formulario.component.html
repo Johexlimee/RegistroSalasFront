@@ -1,0 +1,160 @@
+<div class="container mt-5">
+  <h2 class="text-danger fw-bold text-center">Registro Sala Sistemas</h2>
+  <form #registroForm="ngForm" class="mt-5">
+    <!-- Fila 1 -->
+ 
+    <div class="row my-3">
+      <div class="col-md-6 form-group">
+        <label for="programa">Programa</label>
+        <select
+          class="form-control"
+          id="programa"
+          [(ngModel)]="formData.programa"
+          name="programa"
+          required
+        >
+          <option value="" disabled>Selecciona una opción</option>
+          <option *ngFor="let programa of dataPrograma" [value]="programa.idPrograma">
+            {{ programa.nombre }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="sala">Sala</label>
+        <select
+          class="form-control"
+          id="sala"
+          [(ngModel)]="formData.sala"
+          name="sala"
+          required
+        >
+          <option value="" disabled>Selecciona una opción</option>
+          <option *ngFor="let sala of dataSala" [value]="sala.idSala">
+            {{ sala.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+ 
+    <!-- Fila 3 -->
+    <div class="row my-3" >
+      <div class="col-md-6 form-group">
+        <label for="horaEntrada">Hora Entrada</label>
+        <input
+          type="time"
+          class="form-control"
+          id="horaEntrada"
+          [(ngModel)]="formData.horaEntrada"
+          name="horaEntrada"
+          required
+        />
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="promocion">Promoción</label>
+        <select
+          class="form-control"
+          id="promocion"
+          [(ngModel)]="formData.promocion"
+          name="promocion"
+          required
+        >
+          <option value="" disabled>Selecciona una opción</option>
+          <option *ngFor="let promocion of dataPromocion" [value]="promocion.idProm">
+            {{ promocion.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+ 
+    <!-- Fila 2 -->
+    <div class="row my-3">
+      <div class="col-md-12 form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea
+          class="form-control"
+          id="descripcion"
+          placeholder="ej: hay 20 monitores, 20 mouse, 20 teclados, etc"
+          [(ngModel)]="formData.descripcion"
+          name="descripcion"
+          rows="3"
+        ></textarea>
+      </div>
+    </div>
+ 
+    <!-- Voceros -->
+    <div class="row my-3">
+      <div class="col-md-6 form-group">
+        <label for="nombreBocero1">Nombre Vocero 1</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombreBocero1"
+          [(ngModel)]="formData.nombreBocero1"
+          name="nombreBocero1"
+          required
+        />
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="codigoBocero1">Código Vocero 1</label>
+        <input
+          type="text"
+          class="form-control"
+          id="codigoBocero1"
+          [(ngModel)]="formData.codigoBocero1"
+          name="codigoBocero1"
+          required
+        />
+      </div>
+    </div>
+ 
+    <div *ngIf="mostrarVocero2" class="row my-3">
+      <div class="col-md-6 form-group">
+        <label for="nombreBocero2">Nombre Vocero 2</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombreBocero2"
+          [(ngModel)]="formData.nombreBocero2"
+          name="nombreBocero2"
+        />
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="codigoBocero2">Código Vocero 2</label>
+        <input
+          type="text"
+          class="form-control"
+          id="codigoBocero2"
+          [(ngModel)]="formData.codigoBocero2"
+          name="codigoBocero2"
+        />
+      </div>
+    </div>
+    <div class="mb-3 row" >
+      <div class="col-md-6 form-group"></div>
+      <div class="col-md-6 form-group">
+       <button
+         type="button"
+         class="btn btn-danger mb-3 float-end"  
+         (click)="toggleVocero2()"
+       >
+         {{ mostrarVocero2 ? 'Quitar' : 'Agregar' }} Vocero 2
+       </button>
+      </div>
+     </div>
+ 
+ 
+    <!-- Botón de Enviar -->
+    <div class="text-center my-4">
+      <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="onSubmit()"
+    >
+      Crear Registro
+    </button>
+    </div>
+  </form>
+<app-modal-enviar></app-modal-enviar>
+
+
+</div>

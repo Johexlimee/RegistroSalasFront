@@ -1,0 +1,20 @@
+<div class="novedad-lista">
+    <h2 class="text-center mb-4">Novedades</h2>
+    <div *ngFor="let novedad of novedades" class="novedad-item">
+      <!-- Cabecera con el tipo de novedad y el botón -->
+      <div class="novedad-header" (click)="toggleDetail(novedad)">
+        <span class="titulo">Novedad: {{ novedad.tipoNovedad }}</span>
+        <button>{{ novedad.isOpen ? '-' : '+' }}</button>
+      </div>
+  
+      <!-- Detalles que se despliegan al hacer clic -->
+      <div class="novedad-detalle" *ngIf="novedad.isOpen">
+        <p><strong>ID Novedad:</strong> {{ novedad.idNovedad }}</p>
+        <p><strong>Descripción:</strong> {{ novedad.descripcion }}</p>
+        <p><strong>Serial del equipo:</strong> {{ novedad.equipo.serial }}</p>
+        <p><strong>Sala:</strong> {{ novedad.equipo.sala }}</p>
+        <p><strong>Tipo de equipo:</strong> {{ novedad.equipo.tipoEquipo }}</p>
+      </div>
+    </div>
+  </div>
+  

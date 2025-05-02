@@ -1,0 +1,44 @@
+body {
+    background-color: #f8f9fa;
+  }
+  
+  .color-text{
+    color: var(--color-text);
+    
+  }
+  
+  header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+  }
+  
+  .card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+  }
+  
+  .btn-primary {
+    background-color: #0033a0;
+    border-color: #0033a0;
+  }
+  
+  .btn-primary:hover {
+    background-color: #002080;
+    border-color: #002080;
+  }
+  
+  

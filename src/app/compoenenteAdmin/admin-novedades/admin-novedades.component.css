@@ -1,0 +1,41 @@
+.novedad-lista {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  .novedad-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .novedad-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .novedad-header button {
+    background-color: #0F2087;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .novedad-header button:hover {
+    background-color: #0E1F87;
+  }
+  
+  .novedad-detalle {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+  }
+  
