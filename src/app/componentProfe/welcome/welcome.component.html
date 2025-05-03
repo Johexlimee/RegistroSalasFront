@@ -5,7 +5,7 @@
       <div class="col-sm-6 mb-3 mb-sm-0 ">
         <div class="card text-center h-100">
           <div class="card-body">
-            <h5 class="card-title text-danger fw-bold">Añadir entrega llegada</h5>
+            <h5 class="card-title text-danger fw-bold">Añadir entrega de llegada</h5>
             <p class="card-text fw-bold">Añade el registro de llegada de la sala</p>
             <i class="fa-brands fa-wpforms mb-3" style="font-size: 2rem; color: #dc0234;"></i>
             <br />
@@ -16,39 +16,16 @@
       <div class="col-sm-6 mb-3 mb-sm-0 h-100">
         <div class="card text-center h-100">
           <div class="card-body">
-            <h5 class="card-title text-danger fw-bold">Añadir entrega salida</h5>
+            <h5 class="card-title text-danger fw-bold">Añadir entrega de salida</h5>
             <p class="card-text fw-bold">Busca el registro mas reciente de llegada</p>
             <i class="fa-brands fa-wpforms mb-3" style="font-size: 2rem; color: #dc0234;"></i>
             <br />
-            <a routerLink="/profesores/formulario-salida" class="btn btn-primary mt-2">Crear Registro</a>
+            <!-- <a routerLink="/profesores/formulario-salida" class="btn btn-primary mt-2">Crear Registro</a> -->
+            <!-- <a [routerLink]="['/profesores/formulario-salida', 1]" class="btn btn-primary mt-2">Crear Registro</a> -->
+            <a [routerLink]="['/profesores/formulario-salida', idRegistro]" class="btn btn-primary mt-2">Crear Registro</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  

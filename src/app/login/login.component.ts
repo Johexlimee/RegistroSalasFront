@@ -42,9 +42,9 @@ export class LoginComponent {
         const rol = response.rol;  // Obtener el estado de acceso
 
         console.log('Token guardado en localStorage:', token);
-
-        // Guardar el token en localStorage
-        localStorage.setItem('authToken', token);
+        
+        localStorage.setItem('authToken', token); // Guardar el token en localStorage
+        localStorage.setItem('userRole', rol); // Guarda el rol en localStorage
 
         // Redirigir al usuario según el estado de acceso
         switch (rol) {

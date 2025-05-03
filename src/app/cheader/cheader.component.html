@@ -1,17 +1,20 @@
 <nav class="navbar background-header">
   <div class="container-fluid">
-    <a class="navbar-brand"
-      ><img
+    <a class="navbar-brand" [href]="rol === 'ADMINISTRADOR' ? '/admin' : '/profesores/welcome'">
+      <img
         src="https://uniempresarial.edu.co/wp-content/uploads/2024/04/Recurso-1.png"
         alt="Uniempresarial Logo"
         class="img-fluid"
         style="max-height: 50px"
-    /></a>
+      />
+    </a>
     <div class="d-flex mx-5">
       <div class="mx-5">
         <h6 class="mb-0 text-white fs-2">Kellyn Johanna Delgado Jaimes</h6>
       </div>
-      <i class="fa-solid fa-user fs-1" style="color: #ffffff"></i>
+      <a [href]="rol === 'ADMINISTRADOR' ? '/admin' : '/profesores/welcome'">
+        <i class="fa-solid fa-user fs-1" style="color: #ffffff"></i>
+      </a>
     </div>
   </div>
 </nav>

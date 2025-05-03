@@ -133,4 +133,11 @@ export class ControlSalasService {
       params,
     });
   }
+
+  public obtenerUltimoRegistro(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}control-salas/ultimo-registro`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+  
 }
