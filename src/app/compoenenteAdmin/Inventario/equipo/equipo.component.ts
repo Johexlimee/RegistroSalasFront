@@ -3,6 +3,7 @@ import { EquipoService } from '../../../services/equipo.service';
 import { Equipo } from '../../../modelos/equipo.modelo';
 import { Sala } from '../../../modelos/sala.modelo';
 import { TipoEquipo } from '../../../modelos/tipo-equipo.modelo';
+import { Router } from '@angular/router';
 
 declare var bootstrap: any;
 
@@ -18,10 +19,21 @@ export class EquipoComponent implements OnInit {
   tiposEquipo: TipoEquipo[] = [];
   tipoEquipoSeleccionado: string = ''; // Variable para el filtro de tipo de equipo
   equiposFiltrados: Equipo[] = [];    // Lista de equipos filtrados
-  equipoActual: Equipo = {} as Equipo;
+
+  equipoActual: Equipo = {
+    idEquipo: 0,
+    estadoEquipo: false,
+    serial: '',
+    sala: { idSala: 0, nombre: '' }, // ✅ Inicialización correcta
+    tipoEquipo: { idTipoEquipo: 0, nombre: '' },
+  };
+  
   editando: boolean = false;
 
-  constructor(private equipoService: EquipoService) {}
+  constructor (
+    private equipoService: EquipoService,
+    public router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.cargarEquipos();
@@ -46,6 +58,7 @@ export class EquipoComponent implements OnInit {
       (datos) => {
         this.equipos = datos;
         this.equiposFiltrados = [...this.equipos];
+        console.log(datos);
       },
       (error) => {
         console.error('Error al obtener equipos:', error);
@@ -58,6 +71,7 @@ export class EquipoComponent implements OnInit {
     this.equipoService.getSalas().subscribe(
       (datos) => {
         this.salas = datos;
+        console.log(datos)
       },
       (error) => {
         console.error('Error al obtener salas:', error);
@@ -70,6 +84,7 @@ export class EquipoComponent implements OnInit {
     this.equipoService.getTiposEquipo().subscribe(
       (datos) => {
         this.tiposEquipo = datos;
+        console.log(datos)
       },
       (error) => {
         console.error('Error al obtener tipos de equipo:', error);
@@ -81,7 +96,7 @@ export class EquipoComponent implements OnInit {
   mostrarModalAgregar(): void {
     this.equipoActual = {
       idEquipo: 0,
-      estado: '',
+      estadoEquipo: false,
       serial: '',
       sala: { idSala: 0, nombre: '' },
       tipoEquipo: { idTipoEquipo: 0, nombre: '' },
@@ -101,53 +116,40 @@ export class EquipoComponent implements OnInit {
 
   // Guardar o actualizar equipo
   guardarEquipo(): void {
+    console.log('Antes de validar:', this.equipoActual);
+  
     if (
-      !this.equipoActual.estado ||
-      !this.equipoActual.serial ||
+      this.equipoActual.serial.trim() === '' ||
       !this.equipoActual.sala?.idSala ||
       !this.equipoActual.tipoEquipo?.idTipoEquipo
     ) {
-      console.error('Faltan datos obligatorios:', this.equipoActual);
+      console.error('❌ Faltan datos obligatorios:', this.equipoActual);
       alert('Por favor, complete todos los campos obligatorios.');
       return;
     }
 
+    this.equipoActual.sala.idSala = Number(this.equipoActual.sala.idSala);
+    this.equipoActual.tipoEquipo.idTipoEquipo = Number(this.equipoActual.tipoEquipo.idTipoEquipo);
+  
+    console.log('✅ Datos validados, preparando envío:', JSON.stringify(this.equipoActual));
+  
     const observable = this.editando
       ? this.equipoService.actualizarEquipo(this.equipoActual.idEquipo, this.equipoActual)
       : this.equipoService.guardarEquipo(this.equipoActual);
-
-    observable.subscribe(() => {
-      this.cargarEquipos(); // Refrescar la lista de equipos
-      const modal = bootstrap.Modal.getInstance(document.getElementById('equipoModal'));
-      modal.hide();
+  
+    console.log(`ℹ️ Llamando a ${this.editando ? 'actualizarEquipo' : 'guardarEquipo'}`);
+  
+    observable.subscribe({
+      next: (respuesta) => {
+        console.log('✅ Respuesta del backend:', respuesta);
+        this.cargarEquipos();
+        const modal = bootstrap.Modal.getInstance(document.getElementById('equipoModal'));
+        modal.hide();
+      },
+      error: (error) => {
+        console.error('❌ Error en la petición:', error);
+      }
     });
   }
 }
-
-  
-  /*// Guardar o actualizar un equipo
-  guardarEquipo(): void {
-    if (
-      !this.equipoActual.estado ||
-      !this.equipoActual.serial ||
-      !this.equipoActual.sala?.idSala ||
-      !this.equipoActual.tipoEquipo?.idTipoEquipo
-    ) {
-      console.error('Faltan datos obligatorios:', this.equipoActual);
-      alert('Por favor, complete todos los campos obligatorios.');
-      return;
-    }
-
-    console.log('Enviando equipo:', this.equipoActual);
-    const observable = this.editando
-      ? this.equipoService.actualizarEquipo(this.equipoActual.idEquipo, this.equipoActual)
-      : this.equipoService.guardarEquipo(this.equipoActual);
-
-    observable.subscribe(() => {
-      console.log('Equipo guardado correctamente');
-      this.cargarEquipos(); // Actualizar la lista de equipos
-      const modal = bootstrap.Modal.getInstance(document.getElementById('equipoModal'));
-      modal.hide();
-    });
-  }*/
 

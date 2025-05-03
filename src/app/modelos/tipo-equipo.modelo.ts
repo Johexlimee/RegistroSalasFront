@@ -1,9 +1,9 @@
 export class TipoEquipo {
-    id_tipo_equipo: number;
+    idTipoEquipo: number;
     nombre: string;
   
-    constructor(id_tipo_equipo: number, nombre: string) {
-      this.id_tipo_equipo = id_tipo_equipo;
+    constructor(idTipoEquipo: number, nombre: string) {
+      this.idTipoEquipo = idTipoEquipo;
       this.nombre = nombre;
     }
   }

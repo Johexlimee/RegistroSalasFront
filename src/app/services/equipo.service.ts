@@ -22,7 +22,7 @@ export class EquipoService {
 
   // Obtener salas
   getSalas(): Observable<Sala[]> {
-    return this.http.get<Sala[]>(`${this.baseUrl}sala/listarSalas`);
+    return this.http.get<Sala[]>(`${this.baseUrl}sala/ListarSalas`);
   }
 
   // Obtener tipos de equipos

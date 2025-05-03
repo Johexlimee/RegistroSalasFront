@@ -1,10 +1,20 @@
 <div class="container mt-4">
   <h2>Gestión de Equipos</h2>
-  <button class="btn btn-primary mb-3" (click)="mostrarModalAgregar()">Agregar Equipo</button>
-
+  <button class="btn btn-primary mb-3 me-5" (click)="mostrarModalAgregar()">
+    Agregar Equipo
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary mb-3"
+    (click)="router.navigate(['/admin'])"
+  >
+    Cerrar
+  </button>
   <!-- Filtro por Tipo de Equipo -->
   <div class="mb-3">
-    <label for="filtroTipoEquipo" class="form-label">Filtrar por Tipo de Equipo</label>
+    <label for="filtroTipoEquipo" class="form-label"
+      >Filtrar por Tipo de Equipo</label
+    >
     <select
       id="filtroTipoEquipo"
       [(ngModel)]="tipoEquipoSeleccionado"
@@ -13,7 +23,9 @@
       (change)="filtrarPorTipoEquipo()"
     >
       <option [value]="''">Todos</option>
-      <option *ngFor="let tipo of tiposEquipo" [value]="tipo.nombre">{{ tipo.nombre }}</option>
+      <option *ngFor="let tipo of tiposEquipo" [value]="tipo.nombre">
+        {{ tipo.nombre }}
+      </option>
     </select>
   </div>
 
@@ -31,36 +43,53 @@
     <tbody>
       <tr *ngFor="let equipo of equiposFiltrados">
         <td>{{ equipo.idEquipo }}</td>
-        <td>{{ equipo.estado }}</td>
+        <td>{{ equipo.estadoEquipo }}</td>
         <td>{{ equipo.sala.nombre }}</td>
         <td>{{ equipo.serial }}</td>
         <td>{{ equipo.tipoEquipo.nombre }}</td>
         <td>
-          <button class="btn btn-warning btn-sm" (click)="mostrarModalEditar(equipo)">Editar</button>
+          <button
+            class="btn btn-warning btn-sm"
+            (click)="mostrarModalEditar(equipo)"
+          >
+            Editar
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
 
   <!-- Modal -->
-  <div class="modal fade" id="equipoModal" tabindex="-1" aria-labelledby="equipoModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="equipoModal"
+    tabindex="-1"
+    aria-labelledby="equipoModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ editando ? 'Editar Equipo' : 'Agregar Equipo' }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title">
+            {{ editando ? "Editar Equipo" : "Agregar Equipo" }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
         <form (ngSubmit)="guardarEquipo()">
           <div class="modal-body">
             <div class="mb-3">
               <label for="estado" class="form-label">Estado</label>
               <input
-                type="text"
+                type="checkbox" 
                 id="estado"
-                [(ngModel)]="equipoActual.estado"
+                [(ngModel)]="equipoActual.estadoEquipo"
                 name="estado"
-                class="form-control"
-                required
+                class="form-check-input"
               />
             </div>
             <div class="mb-3">
@@ -73,7 +102,9 @@
                 required
               >
                 <option value="" disabled>Seleccione una sala</option>
-                <option *ngFor="let sala of salas" [value]="sala.id_sala">{{ sala.nombre }}</option>
+                <option *ngFor="let sala of salas" [value]="sala.idSala">
+                  {{ sala.nombre }}
+                </option>
               </select>
             </div>
             <div class="mb-3">
@@ -97,13 +128,23 @@
                 required
               >
                 <option value="" disabled>Seleccione un tipo</option>
-                <option *ngFor="let tipo of tiposEquipo" [value]="tipo.id_tipo_equipo">{{ tipo.nombre }}</option>
+                <option *ngFor="let tipo of tiposEquipo" [value]="tipo.idTipoEquipo">
+                  {{ tipo.nombre }}
+                </option>
               </select>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">{{ editando ? 'Actualizar' : 'Guardar' }}</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">
+              {{ editando ? "Actualizar" : "Guardar" }}
+            </button>
           </div>
         </form>
       </div>
