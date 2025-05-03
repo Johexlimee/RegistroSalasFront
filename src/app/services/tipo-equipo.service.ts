@@ -17,7 +17,7 @@ export class TipoEquipoService {
 
   // Guardar un nuevo equipo
   guardarEquipo(tipoEquipo: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Agregar-TipoEquipo`, tipoEquipo);
+    return this.http.post(`${this.baseUrl}/AgregarTipoEquipo`, tipoEquipo);
   }
 
   // Actualizar un equipo

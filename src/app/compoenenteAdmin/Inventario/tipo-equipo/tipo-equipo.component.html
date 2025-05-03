@@ -1,7 +1,16 @@
 <div class="container mt-4">
   <h2>Gestión de Tipos de Equipos</h2>
-  
-  <button class="btn btn-primary mb-3" (click)="mostrarFormularioAgregar()">Agregar Equipo</button>
+
+  <button class="btn btn-primary mb-3 me-5" (click)="mostrarFormularioAgregar()">
+    Agregar Equipo
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary mb-3"
+    (click)="router.navigate(['/admin'])"
+  >
+    Cerrar
+  </button>
 
   <table class="table table-bordered">
     <thead>
@@ -16,19 +25,37 @@
         <td>{{ tipoEquipo.idTipoEquipo }}</td>
         <td>{{ tipoEquipo.nombre }}</td>
         <td>
-          <button class="btn btn-warning btn-sm" (click)="mostrarFormularioEditar(tipoEquipo)">Editar</button>
+          <button
+            class="btn btn-warning btn-sm"
+            (click)="mostrarFormularioEditar(tipoEquipo)"
+          >
+            Editar
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
 
   <!-- Modal -->
-  <div class="modal fade" id="tipoEquipoModal" tabindex="-1" aria-labelledby="tipoEquipoModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="tipoEquipoModal"
+    tabindex="-1"
+    aria-labelledby="tipoEquipoModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="tipoEquipoModalLabel">{{ editando ? 'Editar Equipo' : 'Agregar Equipo' }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="tipoEquipoModalLabel">
+            {{ editando ? "Editar Equipo" : "Agregar Equipo" }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="modal-body">
           <form #form="ngForm" (ngSubmit)="guardarEquipo()">
@@ -43,8 +70,16 @@
                 required
               />
             </div>
-            <button type="submit" class="btn btn-success">{{ editando ? 'Actualizar' : 'Guardar' }}</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">
+              {{ editando ? "Actualizar" : "Guardar" }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
           </form>
         </div>
       </div>

@@ -85,7 +85,7 @@
             <div class="mb-3">
               <label for="estado" class="form-label">Estado</label>
               <input
-                type="checkbox" 
+                type="checkbox"
                 id="estado"
                 [(ngModel)]="equipoActual.estadoEquipo"
                 name="estado"
@@ -128,7 +128,10 @@
                 required
               >
                 <option value="" disabled>Seleccione un tipo</option>
-                <option *ngFor="let tipo of tiposEquipo" [value]="tipo.idTipoEquipo">
+                <option
+                  *ngFor="let tipo of tiposEquipo"
+                  [value]="tipo.idTipoEquipo"
+                >
                   {{ tipo.nombre }}
                 </option>
               </select>

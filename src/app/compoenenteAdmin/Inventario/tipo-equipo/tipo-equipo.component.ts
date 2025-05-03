@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoEquipoService } from '../../../services/tipo-equipo.service';
+import { Router } from '@angular/router';
 
 declare var bootstrap: any; // Para usar las funciones JS de Bootstrap
 
@@ -14,7 +15,10 @@ export class TipoEquipoComponent implements OnInit {
   equipoActual: any = {}; // Equipo actual para agregar o editar
   editando: boolean = false; // Indica si se está editando
 
-  constructor(private tipoEquipoService: TipoEquipoService) {}
+  constructor (
+    private tipoEquipoService: TipoEquipoService,
+    public router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.cargarEquipos();
@@ -53,22 +57,40 @@ export class TipoEquipoComponent implements OnInit {
     const observable = this.editando
       ? this.tipoEquipoService.actualizarEquipo(this.equipoActual.idTipoEquipo, this.equipoActual)
       : this.tipoEquipoService.guardarEquipo(this.equipoActual);
+
+    const tipoEquipoExistente = this.tipoEquipos.find(tipo => tipo.nombre === this.equipoActual.nombre);
+    if (tipoEquipoExistente) {
+      console.error('❌ Tipo de equipo ya existe:', tipoEquipoExistente);
+      alert('Este tipo de equipo ya está registrado.');
+      return;
+    }
   
-    observable.subscribe(
-      () => {
-        this.cargarEquipos(); // Recargar la lista
+    observable.subscribe({
+      next: (respuesta) => {
+        console.log('✅ Respuesta del backend:', respuesta);
+  
+        if (typeof respuesta === 'string') {
+          console.log('ℹ️ Respuesta en formato string:', respuesta);
+          alert(respuesta); // Mostrar mensaje del backend en una alerta
+        } else {
+          console.log('ℹ️ Respuesta en formato JSON:', JSON.stringify(respuesta));
+        }
+  
+        this.cargarEquipos(); // Recargar lista de tipos de equipo
+  
         const modalElement = document.getElementById('tipoEquipoModal');
         if (modalElement) {
           const modal = bootstrap.Modal.getInstance(modalElement);
-          if (modal) {
-            modal.hide(); // Cierra el modal
-          }
+          if (modal) modal.hide();
         }
       },
-      (error) => {
-        console.error('Error al guardar o actualizar el equipo', error);
+      error: (error) => {
+        console.error('❌ Error en la petición:', error);
+        if (error.status === 409) {
+          alert("Conflicto: El tipo de equipo ya existe.");
+        }
       }
-    );
+    });
   }
   
 }
