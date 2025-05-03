@@ -12,9 +12,7 @@
       <div class="mx-5">
         <h6 class="mb-0 text-white fs-2">Kellyn Johanna Delgado Jaimes</h6>
       </div>
-      <a [href]="rol === 'ADMINISTRADOR' ? '/admin' : '/profesores/welcome'">
-        <i class="fa-solid fa-user fs-1" style="color: #ffffff"></i>
-      </a>
+      <i class="fa-solid fa-user fs-1" style="color: #ffffff" (click)="cerrarSesion()"></i>
     </div>
   </div>
 </nav>

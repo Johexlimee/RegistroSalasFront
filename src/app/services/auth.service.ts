@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 // Definir la respuesta esperada del servidor
 export interface LoginResponse {
@@ -13,21 +14,20 @@ export interface LoginResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  // La URL del endpoint donde se realiza el login
-  private apiUrl = 'http://localhost:8080/api/usuarios/login'; 
+  private apiUrl = 'http://localhost:8080/api/usuarios/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // Método para realizar el login
   login(loginData: { correo: string; contrasena: string }): Observable<LoginResponse> {
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-  });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
 
-  return this.http.post<LoginResponse>(this.apiUrl, loginData, {
-    headers: headers,
-    withCredentials: true,
-  }).pipe(
+    return this.http.post<LoginResponse>(this.apiUrl, loginData, {
+      headers: headers,
+      withCredentials: true,
+    }).pipe(
       tap((response) => {
         console.log('Respuesta del backend en login:', response);
 
@@ -43,5 +43,19 @@ export class AuthService {
         console.log('Rol guardado:', response.rol);
       })
     );
+  }
+
+  // Método para verificar si el usuario está autenticado
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
+
+  // Método para redirigir al login si no está autenticado
+  verificarAutenticacion(): void {
+    if (!this.isAuthenticated()) {
+      console.warn('Usuario no autenticado. Redirigiendo al login...');
+      localStorage.clear(); // Borra todos los datos guardados
+      this.router.navigate(['/']); // Redirige al login
+    }
   }
 }

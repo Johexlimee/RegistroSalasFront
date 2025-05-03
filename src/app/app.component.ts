@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',//Nombre del componente
@@ -7,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'sistema-regitro';
+  title = 'sistema-registro';
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      console.warn('No hay token en localStorage. Redirigiendo al login...');
+      this.router.navigate(['/']);
+    }
+  }
+
 }
