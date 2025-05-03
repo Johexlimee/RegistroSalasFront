@@ -38,7 +38,7 @@ export class FormularioSalidaComponent {
     private promocion: PromocionService,
     private controlSala: ControlSalasService,
     private route: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     private alertService: AlertService,
   ) {}
 
@@ -163,7 +163,7 @@ export class FormularioSalidaComponent {
     ).subscribe({
       next: (response) => {
         console.log('Registro editado con éxito:', response);
-        this.router.navigate(['/salas']);
+        this.alertService.showSuccess('Registro editado con éxito');
       },
       error: (error) => {
         console.error('Error al editar el registro:', error);

@@ -25,9 +25,8 @@ const routes: Routes = [
     children: [
       { path: 'welcome', component: WelcomeComponent },
       { path: 'formulario', component: FormularioComponent },
-      {path: 'formulario-salida', component: FormularioSalidaComponent},
+      { path: 'formulario-salida/:id', component: FormularioSalidaComponent },
       { path: 'novedades', component: NovedadComponent}
-
     ]
   },
 
@@ -41,17 +40,12 @@ const routes: Routes = [
         { path: 'admin-novedades', component: AdminNovedadesComponent},
         { path: '', redirectTo: 'principal', pathMatch: 'full' },  // Redirección por defecto
         { path: 'formulario-salida', component: FormularioSalidaComponent }
-        
-  
       ]
-    }
-      
-    ]
+    } 
+  ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-//comentario

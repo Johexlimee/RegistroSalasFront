@@ -1,9 +1,8 @@
-
 <div class="container mt-5">
   <h2 class="text-danger fw-bold text-center">Registro Sala Sistemas</h2>
   <form #registroForm="ngForm" class="mt-5">
     <!-- Fila 1 -->
- 
+
     <div class="row my-3">
       <div class="col-md-6 form-group">
         <label for="programa">Programa</label>
@@ -15,7 +14,10 @@
           required
         >
           <option value="" disabled>Selecciona una opción</option>
-          <option *ngFor="let programa of dataPrograma" [value]="programa.idPrograma">
+          <option
+            *ngFor="let programa of dataPrograma"
+            [value]="programa.idPrograma"
+          >
             {{ programa.nombre }}
           </option>
         </select>
@@ -36,17 +38,17 @@
         </select>
       </div>
     </div>
- 
+
     <!-- Fila 3 -->
-    <div class="row my-3" >
+    <div class="row my-3">
       <div class="col-md-6 form-group">
-        <label for="horaEntrada">Hora Entrada</label>
+        <label for="horaSalida">Hora Salida</label>
         <input
           type="time"
           class="form-control"
-          id="horaEntrada"
-          [(ngModel)]="formData.horaEntrada"
-          name="horaEntrada"
+          id="horaSalida"
+          [(ngModel)]="formData.horaSalida"
+          name="horaSalida"
           required
         />
       </div>
@@ -60,13 +62,16 @@
           required
         >
           <option value="" disabled>Selecciona una opción</option>
-          <option *ngFor="let promocion of dataPromocion" [value]="promocion.idProm">
+          <option
+            *ngFor="let promocion of dataPromocion"
+            [value]="promocion.idProm"
+          >
             {{ promocion.nombre }}
           </option>
         </select>
       </div>
     </div>
- 
+
     <!-- Fila 2 -->
     <div class="row my-3">
       <div class="col-md-12 form-group">
@@ -81,7 +86,7 @@
         ></textarea>
       </div>
     </div>
- 
+
     <!-- Voceros -->
     <div class="row my-3">
       <div class="col-md-6 form-group">
@@ -107,7 +112,7 @@
         />
       </div>
     </div>
- 
+
     <div *ngIf="mostrarVocero2" class="row my-3">
       <div class="col-md-6 form-group">
         <label for="nombreBocero2">Nombre Vocero 2</label>
@@ -130,111 +135,29 @@
         />
       </div>
     </div>
-    <div class="mb-3 row" >
+    <div class="mb-3 row">
       <div class="col-md-6 form-group"></div>
       <div class="col-md-6 form-group">
-       <button
-         type="button"
-         class="btn btn-danger mb-3 float-end"  
-         (click)="toggleVocero2()"
-       >
-         {{ mostrarVocero2 ? 'Quitar' : 'Agregar' }} Vocero 2
-       </button>
+        <button
+          type="button"
+          class="btn btn-danger mb-3 float-end"
+          (click)="toggleVocero2()"
+        >
+          {{ mostrarVocero2 ? "Quitar" : "Agregar" }} Vocero 2
+        </button>
       </div>
-     </div>
- 
- 
+    </div>
+
     <!-- Botón de Enviar -->
     <div class="text-center my-4">
-      <button
-      type="submit"
-      class="btn btn-primary"
-      (click)="onSubmit()"
-    >
-      Crear Registro
-    </button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+        Crear Registro
+      </button>
+      <button type="button" class="btn btn-secondary ms-3" (click)="router.navigate(['/profesores/welcome'])">
+        Cerrar
+      </button>
     </div>
   </form>
 </div>
 
-
-<!-- 
-<div class="mt-5">
-  <div class="card shadow bg-body-tertiary rounded">
-    <h2 class="red-color-text fw-bold text-center mt-3">Equipos de la sala</h2>
-    <div class="card-header">
-      <div class="row p-3">
-        <div class="col-12 col-md-6 col-lg-6 text-start">
-         
-          
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 text-end mt-2">
-          <button
-            class="btn btn-danger fw-semibold text-white"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#descripcionModal"
-          >
-          <i class="ri-add-circle-line"></i>  agregar descripcion entrega
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="card-body">
-      <div>
-        <input type="text"  class="form-control mb-3" />
-        <div class="table-responsive m-1">
-        
-          <div >
-            <table id="table" class="table table-striped table-bordered" >
-              <thead>
-                <tr>
-                  <th class="text-light text-center bg-danger ">
-                   ID
-                  </th>
-                  <th class=" text-light text-center bg-danger">
-                    serial
-                  </th>
-                  <th class="text-light text-center bg-danger">
-                    estado
-                  </th>
-                  <th class=" text-light text-center bg-danger">
-                    tipoEquipo
-                  </th>
-                  <th class=" text-light text-center bg-danger">
-                Novedad
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr  >
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <div class="text-light text-center align-items-center justify-content-center">
-                      <button
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#novedadModal"
-        class="btn btn-outline-dark"
-      >
-        <i class="ri-edit-box-line"></i> 
-        Agregar novedad
-      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
--->
 <app-modal-enviar></app-modal-enviar>
-

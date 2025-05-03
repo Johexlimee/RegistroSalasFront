@@ -3,7 +3,7 @@ import { SalaService } from '../../services/sala.service';
 import { ControlSalasService } from '../../services/control-sala.service';
 import { ProgramaService } from '../../services/programa.service';
 import { PromocionService } from '../../services/promocion.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   standalone: false,
@@ -32,7 +32,8 @@ export class FormularioComponent {
     private programas: ProgramaService, 
     private sala: SalaService, 
     private promocion: PromocionService, 
-    private controlSala: ControlSalasService
+    private controlSala: ControlSalasService,
+    public router: Router,
   ) { }
 
   ngOnInit(): void {

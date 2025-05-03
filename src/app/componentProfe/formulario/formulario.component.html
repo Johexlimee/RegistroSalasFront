@@ -2,7 +2,7 @@
   <h2 class="text-danger fw-bold text-center">Registro Sala Sistemas</h2>
   <form #registroForm="ngForm" class="mt-5">
     <!-- Fila 1 -->
- 
+
     <div class="row my-3">
       <div class="col-md-6 form-group">
         <label for="programa">Programa</label>
@@ -14,7 +14,10 @@
           required
         >
           <option value="" disabled>Selecciona una opción</option>
-          <option *ngFor="let programa of dataPrograma" [value]="programa.idPrograma">
+          <option
+            *ngFor="let programa of dataPrograma"
+            [value]="programa.idPrograma"
+          >
             {{ programa.nombre }}
           </option>
         </select>
@@ -35,9 +38,9 @@
         </select>
       </div>
     </div>
- 
+
     <!-- Fila 3 -->
-    <div class="row my-3" >
+    <div class="row my-3">
       <div class="col-md-6 form-group">
         <label for="horaEntrada">Hora Entrada</label>
         <input
@@ -59,13 +62,16 @@
           required
         >
           <option value="" disabled>Selecciona una opción</option>
-          <option *ngFor="let promocion of dataPromocion" [value]="promocion.idProm">
+          <option
+            *ngFor="let promocion of dataPromocion"
+            [value]="promocion.idProm"
+          >
             {{ promocion.nombre }}
           </option>
         </select>
       </div>
     </div>
- 
+
     <!-- Fila 2 -->
     <div class="row my-3">
       <div class="col-md-12 form-group">
@@ -80,7 +86,7 @@
         ></textarea>
       </div>
     </div>
- 
+
     <!-- Voceros -->
     <div class="row my-3">
       <div class="col-md-6 form-group">
@@ -106,7 +112,7 @@
         />
       </div>
     </div>
- 
+
     <div *ngIf="mostrarVocero2" class="row my-3">
       <div class="col-md-6 form-group">
         <label for="nombreBocero2">Nombre Vocero 2</label>
@@ -129,32 +135,28 @@
         />
       </div>
     </div>
-    <div class="mb-3 row" >
+    <div class="mb-3 row">
       <div class="col-md-6 form-group"></div>
       <div class="col-md-6 form-group">
-       <button
-         type="button"
-         class="btn btn-danger mb-3 float-end"  
-         (click)="toggleVocero2()"
-       >
-         {{ mostrarVocero2 ? 'Quitar' : 'Agregar' }} Vocero 2
-       </button>
+        <button
+          type="button"
+          class="btn btn-danger mb-3 float-end"
+          (click)="toggleVocero2()"
+        >
+          {{ mostrarVocero2 ? "Quitar" : "Agregar" }} Vocero 2
+        </button>
       </div>
-     </div>
- 
- 
+    </div>
+
     <!-- Botón de Enviar -->
     <div class="text-center my-4">
-      <button
-      type="submit"
-      class="btn btn-primary"
-      (click)="onSubmit()"
-    >
-      Crear Registro
-    </button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+        Crear Registro
+      </button>
+      <button type="button" class="btn btn-secondary ms-3" (click)="router.navigate(['/profesores/welcome'])">
+        Cerrar
+      </button>
     </div>
   </form>
-<app-modal-enviar></app-modal-enviar>
-
-
+  <app-modal-enviar></app-modal-enviar>
 </div>
