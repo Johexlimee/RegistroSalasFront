@@ -7,12 +7,12 @@ import { AlertService } from './alert.service';
   providedIn: 'root',
 })
 export class NovedadService {
-  private apiUrl: string = 'http://localhost:8080/'; // URL base del backend
+  private apiUrl: string = 'http://localhost:8080/Novedad/'; // URL base del backend
 
   constructor(private http: HttpClient, private alertService: AlertService) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('jwtToken'); // Obtenemos el token desde localStorage
+    const token = localStorage.getItem('authToken');
     if (!token) {
       console.error('Token no encontrado.');
       return new HttpHeaders();
@@ -36,7 +36,7 @@ export class NovedadService {
     };
 
     return this.http
-      .post<any>(`${this.apiUrl}novedad`, data, {
+      .post<any>(`${this.apiUrl}Agregar-Novedad`, data, {
         headers: this.getAuthHeaders(),
       })
       .pipe(
@@ -68,7 +68,7 @@ export class NovedadService {
     };
 
     return this.http
-      .put<any>(`${this.apiUrl}novedad/${idNovedad}`, data, {
+      .put<any>(`${this.apiUrl}Novedad/${idNovedad}`, data, {
         headers: this.getAuthHeaders(),
       })
       .pipe(
@@ -105,7 +105,7 @@ export class NovedadService {
   // Método para listar todas las novedades
   public getAllNovedades(): Observable<any[]> {
     return this.http
-      .get<any[]>(`${this.apiUrl}novedad`, {
+      .get<any[]>(`${this.apiUrl}listaNovedades`, {
         headers: this.getAuthHeaders(),
       })
       .pipe(

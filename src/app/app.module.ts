@@ -15,12 +15,12 @@ import { EquipoComponent } from './compoenenteAdmin/Inventario/equipo/equipo.com
 
 import { FormularioSalidaComponent } from './componentProfe/formulario-salida/formulario-salida.component';
 import { ModalEnviarComponent } from './componentProfe/modal-enviar/modal-enviar.component';
-
-import { AdminNovedadesComponent } from './compoenenteAdmin/admin-novedades/admin-novedades.component';
+import { AdminNovedadesComponent } from './compoenenteAdmin/novedades/admin-novedades/admin-novedades.component';
 import { DashboardComponent } from './compoenenteAdmin/dashboard/dashboard.component';
 import { NovedadComponent } from './componentProfe/novedad/novedad.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { TipoNovedadComponent } from './compoenenteAdmin/novedades/tipo-novedad/tipo-novedad.component';
 
 
 @NgModule({
@@ -39,7 +39,8 @@ import { LoginComponent } from './login/login.component';
     NovedadComponent,
     ModalEnviarComponent,
     AdminNovedadesComponent,
-    DashboardComponent 
+    DashboardComponent,
+    TipoNovedadComponent 
   ],
 imports: [
   BrowserModule,

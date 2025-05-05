@@ -10,9 +10,8 @@ import { LayoutProfeComponent } from './layout/layout-profe/layout-profe.compone
 import { FormularioComponent } from './componentProfe/formulario/formulario.component';
 import { FormularioSalidaComponent } from './componentProfe/formulario-salida/formulario-salida.component';
 import { NovedadComponent } from './componentProfe/novedad/novedad.component';
-import { AdminNovedadesComponent } from './compoenenteAdmin/admin-novedades/admin-novedades.component';
-import { LayoutAdminComponent } from './layout/layout-admin/layout-admin.component';
-
+import { AdminNovedadesComponent } from './compoenenteAdmin/novedades/admin-novedades/admin-novedades.component';
+import { TipoNovedadComponent } from './compoenenteAdmin/novedades/tipo-novedad/tipo-novedad.component';
 
 // Definimos las rutas
 const routes: Routes = [
@@ -38,8 +37,8 @@ const routes: Routes = [
         { path: 'principal', component: PrincipalComponent },
         { path: 'tipo-equipo', component: TipoEquipoComponent },
         { path: 'admin-novedades', component: AdminNovedadesComponent},
+        { path: 'tipo-novedad', component: TipoNovedadComponent},
         { path: '', redirectTo: 'principal', pathMatch: 'full' },  // Redirección por defecto
-        { path: 'formulario-salida', component: FormularioSalidaComponent }
       ]
     } 
   ]

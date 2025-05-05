@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NovedadService } from '../../services/novedad.service';
+import { NovedadService } from '../../../services/novedad.service';
 
 @Component({
   selector: 'app-admin-novedades',
