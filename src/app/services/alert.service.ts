@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AlertService {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   // Método genérico para mostrar una alerta
   showAlert(options: SweetAlertOptions) {
@@ -40,23 +40,25 @@ export class AlertService {
   }
 
 
-// Método para mostrar una alerta de confirmación y redirigir a otra ruta
-showConfirmation(message: string, idRegistro: string | number, title: string = 'Registro creado exitoso ¿quieres agregar una novedad?') {
-  return Swal.fire({
-    title: title,
-    text: message,
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#2e8b57',
-    cancelButtonColor: '#2e8b57',
-    confirmButtonText: 'Sí',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Redirige a otra ruta, pasando el idSala como parámetro
-      this.router.navigate([`/profesores/formulario-salida/${idRegistro}`]);  
-    }
-  });
-}
+  // Método para mostrar una alerta de confirmación y redirigir a otra ruta
+  showConfirmation(message: string, idRegistro: string | number, title: string = 'Registro creado exitoso ¿quieres agregar una novedad?') {
+    return Swal.fire({
+      title: title,
+      text: message,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#2e8b57',
+      cancelButtonColor: '#2e8b57',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirige a otra ruta, pasando el idSala como parámetro
+        console.log('Redirigiendo a:', `/profesores/novedades/${idRegistro}`);
+        this.router.navigate([`/profesores/novedades/${idRegistro}`]);
+        // this.router.navigate([`/profesores/novedades/${idRegistro}`]);
+      }
+    });
+  }
 
 }

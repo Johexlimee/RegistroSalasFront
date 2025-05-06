@@ -60,13 +60,13 @@ export class NovedadService {
     idEquipo: number,
     idTipoNovedad: number
   ): Observable<any> {
-    const data = {
-      idNovedad,
-      descripcion,
-      equipo: { idEquipo },
-      tipoNovedad1: { idTipoNovedad },
-    };
 
+    const data = {
+      descripcion,
+      equipo: { idEquipo: idEquipo }, // ✅ Ahora coincide con el formato esperado en el backend
+      tipoNovedad1: { idTipoNovedad: idTipoNovedad },
+    };
+    
     return this.http
       .put<any>(`${this.apiUrl}Novedad/${idNovedad}`, data, {
         headers: this.getAuthHeaders(),

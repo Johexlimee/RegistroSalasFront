@@ -25,8 +25,7 @@ const routes: Routes = [
       { path: 'welcome', component: WelcomeComponent },
       { path: 'formulario', component: FormularioComponent },
       { path: 'formulario-salida/:id', component: FormularioSalidaComponent },
-      { path: 'novedades', component: NovedadComponent}
-    ]
+      { path: 'novedades/:id', component: NovedadComponent }    ]
   },
 
     { path: 'admin',

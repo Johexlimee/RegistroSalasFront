@@ -21,7 +21,7 @@
   
         <!-- Selección de Tipo de Equipo -->
         <div class="col-md-6 form-group">
-          <label for="tipo-equipo">Tipo de Equipo</label>
+          <label for="tipo-equipo">Serial del equipo</label>
           <select
             class="form-control"
             id="tipo-equipo"
@@ -30,9 +30,9 @@
             required
           >
             <option value="" disabled>Selecciona una opción</option>
-            <option *ngFor="let equipo of dataTipoEquipo" [value]="equipo.idEquipo">
-              {{ equipo.nombre }}
-            </option>
+            <option *ngFor="let equipo of dataEquipo" [value]="equipo.idEquipo">
+              {{ equipo.serial }}
+            </option>            
           </select>
         </div>
       </div>

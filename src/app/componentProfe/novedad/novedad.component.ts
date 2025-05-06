@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TipoNovedadService } from '../../services/tipo-novedad.service';
-import { TipoEquipoService } from '../../services/tipo-equipo.service';
+import { EquipoService } from '../../services/equipo.service';
 import { NovedadService } from '../../services/novedad.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -19,11 +19,11 @@ export class NovedadComponent implements OnInit {
   };
 
   dataTipoNovedad: any[] = [];
-  dataTipoEquipo: any[] = [];
+  dataEquipo: any[] = [];
 
   constructor(
     private tipoNovedadService: TipoNovedadService,
-    private tipoEquipoService: TipoEquipoService,
+    private equipoService: EquipoService,
     private novedadService: NovedadService,
     private router: Router,
     @Inject(NgbModal) private modalService: NgbModal // Servicio para manejar el modal
@@ -31,7 +31,7 @@ export class NovedadComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarTiposNovedad();
-    this.cargarTiposEquipo();
+    this.cargarEquipos();
   }
 
   cargarTiposNovedad(): void {
@@ -41,12 +41,17 @@ export class NovedadComponent implements OnInit {
     });
   }
 
-  cargarTiposEquipo(): void {
-    this.tipoEquipoService.obtenerEquipos().subscribe({
-      next: (data) => (this.dataTipoEquipo = data),
-      error: (err) => console.error('Error al cargar tipos de equipo:', err)
+  cargarEquipos(): void {
+    this.equipoService.getEquipos().subscribe({
+      next: (data) => {
+        console.log('Equipos obtenidos:', data);
+        this.dataEquipo = data; // ✅ Usamos `dataEquipo` en lugar de `dataTipoEquipo`
+      },
+      error: (err) => console.error('Error al cargar equipos:', err)
     });
   }
+  
+  
 
   validarFormulario(): boolean {
     return (
@@ -62,23 +67,43 @@ export class NovedadComponent implements OnInit {
       return;
     }
 
+    console.log('Datos enviados al servicio:', this.formData);
+
+    const tipoEquipoId = Number(this.formData.tipoEquipo);
+    if (isNaN(tipoEquipoId)) {
+      alert('Error: Tipo de equipo no válido.');
+      return;
+    }
+
+    console.log('Validando antes de enviar:', this.formData);
+    if (!this.formData.tipoNovedad || !this.formData.tipoEquipo || !this.formData.descripcion) {
+      alert('Todos los campos deben estar completos.');
+      return;
+    }
+
     this.novedadService.createNovedad(
       this.formData.descripcion,
-      this.formData.tipoEquipo,
-      this.formData.tipoNovedad
+      Number(this.formData.tipoEquipo), // ✅ Ahora enviamos el ID correctamente
+      Number(this.formData.tipoNovedad)
     ).subscribe({
-      next: () => {
-        this.modalService.open(modal, { centered: true }); // Abre el modal de éxito
+      next: (response) => {
+        console.log('Respuesta del servidor:', response);
+        this.modalService.open(modal, { centered: true });
+        console.log('Validando formulario:', this.formData);
+        console.log('Tipo Novedad:', this.formData.tipoNovedad);
+        console.log('Tipo Equipo:', this.formData.tipoEquipo);
+        console.log('Descripción:', this.formData.descripcion);
       },
       error: (err) => {
-        console.error('Error al crear la novedad:', err);
+        console.error('Error en la solicitud:', err);
         alert('Error al registrar la novedad.');
       }
     });
+    
   }
 
   irAlInicio(): void {
-    this.router.navigate(['/welcome']);
+    this.router.navigate(['profesores/welcome']);
   }
 
   crearOtraNovedad(): void {

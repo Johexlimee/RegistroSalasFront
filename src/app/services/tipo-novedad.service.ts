@@ -7,12 +7,12 @@ import { AlertService } from './alert.service';
   providedIn: 'root',
 })
 export class TipoNovedadService {
-  private apiUrl: string = 'http://localhost:8080/'; // URL base del backend
+  private apiUrl: string = 'http://localhost:8080/tipo-novedad/'; // URL base del backend
 
   constructor(private http: HttpClient, private alertService: AlertService) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('jwtToken'); // Obtenemos el token desde localStorage
+    const token = localStorage.getItem('authToken');
     if (!token) {
       console.error('Token no encontrado.');
       return new HttpHeaders();
@@ -28,7 +28,7 @@ export class TipoNovedadService {
     const data = { nombre };
 
     return this.http
-      .post<any>(`${this.apiUrl}tipo-novedad`, data, {
+      .post<any>(`${this.apiUrl}agregar-novedad`, data, {
         headers: this.getAuthHeaders(),
       })
       .pipe(
@@ -50,7 +50,7 @@ export class TipoNovedadService {
     const data = { idTipoNovedad: id, nombre };
 
     return this.http
-      .put<any>(`${this.apiUrl}tipo-novedad/${id}`, data, {
+      .put<any>(`${this.apiUrl}tipo-novedad-id/${id}`, data, {
         headers: this.getAuthHeaders(),
       })
       .pipe(
@@ -72,7 +72,7 @@ export class TipoNovedadService {
   // Método para obtener un tipo de novedad por ID
   public getTipoNovedadById(id: number): Observable<any> {
     return this.http
-      .get<any>(`${this.apiUrl}tipo-novedad/${id}`, {
+      .get<any>(`${this.apiUrl}tipo-novedad-id/${id}`, {
         headers: this.getAuthHeaders(),
       })
       .pipe(
@@ -89,7 +89,7 @@ export class TipoNovedadService {
   // Método para listar todos los tipos de novedades
   public getAllTipoNovedad(): Observable<any[]> {
     return this.http
-      .get<any[]>(`${this.apiUrl}tipo-novedad`, {
+      .get<any[]>(`${this.apiUrl}listanovedades`, {
         headers: this.getAuthHeaders(),
       })
       .pipe(
