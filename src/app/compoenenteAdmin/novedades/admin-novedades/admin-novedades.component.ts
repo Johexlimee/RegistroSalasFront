@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NovedadService } from '../../../services/novedad.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-novedades',
@@ -11,7 +12,10 @@ import { NovedadService } from '../../../services/novedad.service';
 export class AdminNovedadesComponent {
   novedades: any[] = [];
 
-  constructor(private novedadService: NovedadService) {}
+  constructor(
+    private novedadService: NovedadService,
+    public router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.cargarNovedades();
