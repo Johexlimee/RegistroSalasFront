@@ -1,1 +1,89 @@
-<p>tipo-novedad works!</p>
+<div class="container mt-4">
+    <h2>Gestión de Tipos de Equipos</h2>
+  
+    <button class="btn btn-primary mb-3 me-5" (click)="mostrarFormularioAgregar()">
+      Agregar Tipo de novedad
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary mb-3"
+      (click)="router.navigate(['/admin'])"
+    >
+      Cerrar
+    </button>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tipoNovedad of tipoNovedad">
+          <td>{{ tipoNovedad.idTipoNovedad }}</td>
+          <td>{{ tipoNovedad.nombre }}</td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm"
+              (click)="mostrarFormularioEditar(tipoNovedad)"
+            >
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="tipoEquipoModal"
+      tabindex="-1"
+      aria-labelledby="tipoEquipoModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tipoEquipoModalLabel">
+              {{ editando ? "Editar Equipo" : "Agregar Equipo" }}
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form #form="ngForm" (ngSubmit)="guardarTipoNovedad()">
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  [(ngModel)]="novedadActual.nombre"
+                  name="nombre"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-success">
+                {{ editando ? "Actualizar" : "Guardar" }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

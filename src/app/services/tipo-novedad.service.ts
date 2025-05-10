@@ -47,27 +47,25 @@ export class TipoNovedadService {
 
   // Método para editar un tipo de novedad existente
   public updateTipoNovedad(id: number, nombre: string): Observable<any> {
-    const data = { idTipoNovedad: id, nombre };
-
-    return this.http
-      .put<any>(`${this.apiUrl}tipo-novedad-id/${id}`, data, {
-        headers: this.getAuthHeaders(),
+    const data = { nombre };
+  
+    return this.http.put<any>(`${this.apiUrl}tipo-novedad-id`, data, {
+      headers: this.getAuthHeaders(),
+      params: new HttpParams().set("id", id.toString()), // Agregar el id como query param
+    }).pipe(
+      tap(() => {
+        this.alertService.showSuccess(
+          `Tipo de novedad con ID ${id} actualizado con éxito.`
+        );
+      }),
+      catchError((error) => {
+        console.error('Error al actualizar el tipo de novedad', error);
+        this.alertService.showError('Error al actualizar el tipo de novedad.');
+        return of(null);
       })
-      .pipe(
-        tap(() => {
-          this.alertService.showSuccess(
-            `Tipo de novedad con ID ${id} actualizado con éxito.`
-          );
-        }),
-        catchError((error) => {
-          console.error('Error al actualizar el tipo de novedad', error);
-          this.alertService.showError(
-            'Error al actualizar el tipo de novedad.'
-          );
-          return of(null);
-        })
-      );
+    );
   }
+  
 
   // Método para obtener un tipo de novedad por ID
   public getTipoNovedadById(id: number): Observable<any> {
